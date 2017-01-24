@@ -109,6 +109,7 @@ if(params.bam_folder) {
 	   shell:
 	   bam_tag = bam_bai[0].baseName
 	   '''
+	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export GATK_JAR=!{params.gatk_jar}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
@@ -132,6 +133,7 @@ if(params.bam_folder) {
 
 	   shell:
 	   '''
+	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
  
@@ -205,6 +207,7 @@ if(params.bam_folder) {
 	   shell:
 	   tumor_normal_tag = tn[0].baseName.replace(params.suffix_tumor,"")
 	   '''
+	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export GATK_JAR=!{params.gatk_jar}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
@@ -229,6 +232,7 @@ if(params.bam_folder) {
 
 	   shell:
 	   '''
+	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
 	 
@@ -256,6 +260,7 @@ if(params.bam_folder) {
 
 	   shell:
 	   '''
+	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
  
