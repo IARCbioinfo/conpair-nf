@@ -112,7 +112,7 @@ if(params.bam_folder) {
 	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export GATK_JAR=!{params.gatk_jar}
-	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
+	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}
 
 	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{bam_tag}.bam -O !{bam_tag}.pileup --reference !{fasta_ref} --temp_dir_java tmp --remove_chr_prefix
 	   '''
@@ -135,7 +135,7 @@ if(params.bam_folder) {
 	   '''
 	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
-	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
+	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
  
 	   !{params.conpair_dir}/scripts/estimate_tumor_normal_contamination.py -T !{pileup_file} -N !{pileup_file} --outfile !{bam_tag}_contamination.txt
 	   echo -ne !{bam_tag}"\t"
@@ -210,7 +210,7 @@ if(params.bam_folder) {
 	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export GATK_JAR=!{params.gatk_jar}
-	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
+	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
 
 	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{tumor_normal_tag}!{params.suffix_tumor}.bam -O !{tumor_normal_tag}!{params.suffix_tumor}.pileup --reference !{fasta_ref} --temp_dir_java tmp --remove_chr_prefix
 	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{tumor_normal_tag}!{params.suffix_normal}.bam -O !{tumor_normal_tag}!{params.suffix_normal}.pileup --reference !{fasta_ref} --temp_dir_java tmp --remove_chr_prefix
@@ -234,7 +234,7 @@ if(params.bam_folder) {
 	   '''
 	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
-	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
+	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
 	 
 	   !{params.conpair_dir}/scripts/verify_concordance.py -T !{tumor} -N !{normal} --outfile !{tumor_normal_tag}_concordance.txt
 	   echo -ne !{tumor_normal_tag}"\t"
@@ -262,7 +262,7 @@ if(params.bam_folder) {
 	   '''
 	   set +u
 	   export CONPAIR_DIR=!{params.conpair_dir}
-	   export PYTHONPATH=${PYTHONPATH}:!{params.gatk_jar}/modules/
+	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
  
 	   !{params.conpair_dir}/scripts/estimate_tumor_normal_contamination.py -T !{tumor} -N !{normal} --outfile !{tumor_normal_tag}_contamination.txt
 	   echo -ne !{tumor_normal_tag}"\t"
