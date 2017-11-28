@@ -10,6 +10,7 @@
 
 params.help = null
 params.ref = null
+params.markers = null
 params.tumor_bam_folder = null
 params.normal_bam_folder = null
 params.bam_folder = null
@@ -17,6 +18,11 @@ params.conpair_dir = null
 params.gatk_jar = null
 params.concordance_out = 'concordance_summary.txt'
 params.contamination_out = 'contamination_summary.txt'
+if (params.markers){
+  markers_tag = "--markers"
+} else {
+  markers_tag = ""
+}
 
 if (params.help) {
     log.info ''
@@ -212,8 +218,8 @@ if(params.bam_folder) {
 	   export GATK_JAR=!{params.gatk_jar}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
 
-	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{tumor_normal_tag}!{params.suffix_tumor}.bam -O !{tumor_normal_tag}!{params.suffix_tumor}.pileup --reference !{fasta_ref} --temp_dir_java tmp --remove_chr_prefix
-	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{tumor_normal_tag}!{params.suffix_normal}.bam -O !{tumor_normal_tag}!{params.suffix_normal}.pileup --reference !{fasta_ref} --temp_dir_java tmp --remove_chr_prefix
+	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{tumor_normal_tag}!{params.suffix_tumor}.bam -O !{tumor_normal_tag}!{params.suffix_tumor}.pileup --reference !{fasta_ref} !{markers_tag} !{params.markers} --temp_dir_java tmp --remove_chr_prefix
+	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{tumor_normal_tag}!{params.suffix_normal}.bam -O !{tumor_normal_tag}!{params.suffix_normal}.pileup --reference !{fasta_ref} !{markers_tag} !{params.markers} --temp_dir_java tmp --remove_chr_prefix
 	   '''
 	}
 
