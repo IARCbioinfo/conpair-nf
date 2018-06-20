@@ -120,7 +120,7 @@ if(params.bam_folder) {
 	   export GATK_JAR=!{params.gatk_jar}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}
 
-	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{bam_tag}.bam -O !{bam_tag}.pileup --reference !{fasta_ref} --temp_dir_java tmp --remove_chr_prefix
+	   !{params.conpair_dir}/scripts/run_gatk_pileup_for_sample.py -B !{bam_tag}.bam -O !{bam_tag}.pileup --reference !{fasta_ref} !{markers_tag} !{params.markers} --temp_dir_java tmp --remove_chr_prefix
 	   '''
 	}
              
