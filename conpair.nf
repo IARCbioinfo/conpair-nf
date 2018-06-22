@@ -143,7 +143,7 @@ if(params.bam_folder) {
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
  
-	   !{params.conpair_dir}/scripts/estimate_tumor_normal_contamination.py -T !{pileup_file} -N !{pileup_file} --outfile !{bam_tag}_contamination.txt
+	   !{params.conpair_dir}/scripts/estimate_tumor_normal_contamination.py -T !{pileup_file} -N !{pileup_file} !{markers_tag} !{params.markers} --outfile !{bam_tag}_contamination.txt
 	   echo -ne !{bam_tag}"\t"
 	   grep Normal !{bam_tag}_contamination.txt | sed 's/.*: //'
 	   '''
@@ -242,7 +242,7 @@ if(params.bam_folder) {
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
 	 
-	   !{params.conpair_dir}/scripts/verify_concordance.py -T !{tumor} -N !{normal} --outfile !{tumor_normal_tag}_concordance.txt
+	   !{params.conpair_dir}/scripts/verify_concordance.py -T !{tumor} -N !{normal} !{markers_tag} !{params.markers} --outfile !{tumor_normal_tag}_concordance.txt
 	   echo -ne !{tumor_normal_tag}"\t"
 	   grep Concordance !{tumor_normal_tag}_concordance.txt | sed 's/.*: //' 
 	   '''
@@ -270,7 +270,7 @@ if(params.bam_folder) {
 	   export CONPAIR_DIR=!{params.conpair_dir}
 	   export PYTHONPATH=${PYTHONPATH}:!{params.conpair_dir}/modules/
  
-	   !{params.conpair_dir}/scripts/estimate_tumor_normal_contamination.py -T !{tumor} -N !{normal} --outfile !{tumor_normal_tag}_contamination.txt
+	   !{params.conpair_dir}/scripts/estimate_tumor_normal_contamination.py -T !{tumor} -N !{normal} !{markers_tag} !{params.markers} --outfile !{tumor_normal_tag}_contamination.txt
 	   echo -ne !{tumor_normal_tag}"\t"
 	   grep Normal !{tumor_normal_tag}_contamination.txt | sed 's/.*: //'  | tr '\n' '\t'
 	   grep Tumor !{tumor_normal_tag}_contamination.txt | sed 's/.*: //'
